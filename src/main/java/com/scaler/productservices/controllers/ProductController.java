@@ -26,9 +26,14 @@ public class ProductController {
         return productService.getAllProducts();
     }
     //Update-Patch
-    @PutMapping("/{id}")
+    @PatchMapping ("/{id}")
     public Product updateProduct(@PathVariable("id") Long id, @RequestBody Product product){
         return productService.updateProduct(id, product);
+    }
+
+    @PutMapping("/{id}")
+    public Product replaceProduct(@PathVariable("id") Long id, @RequestBody Product product){
+        return productService.replaceProduct(id, product);
     }
 
 }
