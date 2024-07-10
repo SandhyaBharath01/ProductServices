@@ -8,4 +8,5 @@ import lombok.Setter;
 public class ExceptionDto {
     private String message;
     private String solution;
+    private Long id;
 }

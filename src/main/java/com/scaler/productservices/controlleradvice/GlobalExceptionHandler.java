@@ -32,9 +32,11 @@ public class GlobalExceptionHandler {
     }
     //Product Not found Exception
     @ExceptionHandler(ProductNotFoundException.class)
-    public ResponseEntity<ExceptionDto> handleProductNotFoundException(){
+    public ResponseEntity<ExceptionDto> handleProductNotFoundException(ProductNotFoundException ex){
         ExceptionDto exceptionDto = new ExceptionDto();
         exceptionDto.setMessage("Product Not Found");
+//        exceptionDto.setId();
+        exceptionDto.setId(ex.getProductId());
         exceptionDto.setSolution("Try again with another product");
         ResponseEntity<ExceptionDto> response = new ResponseEntity<>(
                 exceptionDto,
