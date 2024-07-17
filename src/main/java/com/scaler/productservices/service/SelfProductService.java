@@ -43,4 +43,11 @@ public class SelfProductService implements ProductService{
     public Product replaceProduct(Long id, Product product) {
         return null;
     }
+    public Product addProduct(Product product) {
+        return null;
+    }
+    public void deleteProduct(Long id) {
+        productRepository.deleteById(id);
+    }
+
 }
