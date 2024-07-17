@@ -7,6 +7,7 @@ import org.springframework.web.client.RestTemplate;
 
 import  java.util.List;
 
+@Service("selfProductService")
 public interface ProductService {
 
 //    Product getSingleProduct(Long productId);
