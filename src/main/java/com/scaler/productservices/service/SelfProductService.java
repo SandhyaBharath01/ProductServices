@@ -1,6 +1,7 @@
 package com.scaler.productservices.service;
 
 import com.scaler.productservices.exceptions.ProductNotFoundException;
+import com.scaler.productservices.models.Category;
 import com.scaler.productservices.models.Product;
 import com.scaler.productservices.repositories.CategoryRepository;
 import com.scaler.productservices.repositories.ProductRepository;
@@ -43,11 +44,17 @@ public class SelfProductService implements ProductService{
     public Product replaceProduct(Long id, Product product) {
         return null;
     }
-    public Product addProduct(Product product) {
-        return null;
-    }
     public void deleteProduct(Long id) {
         productRepository.deleteById(id);
     }
-
+    @Override
+    public Product addNewProduct(Product product) {
+//        return null;
+        Category category = product.getCategory();
+        if(category.getId() == null){
+            category = categoryRepository.save(category);
+            product.setCategory(category);
+        }
+        return productRepository.save(product);
+    }
 }
