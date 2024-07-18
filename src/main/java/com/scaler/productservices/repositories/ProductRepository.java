@@ -3,6 +3,7 @@ package com.scaler.productservices.repositories;
 import com.scaler.productservices.models.Product;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,3 +20,4 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Override
     List<Product> findAll(Sort sort);
 }
+

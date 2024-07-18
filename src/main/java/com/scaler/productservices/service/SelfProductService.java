@@ -8,6 +8,7 @@ import com.scaler.productservices.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service("selfProductService")
@@ -36,8 +37,19 @@ public class SelfProductService implements ProductService{
     }
 
     @Override
-    public Product updateProduct(Long id, Product product) {
-        return null;
+    public Product updateProduct(Long id, Product product) throws ProductNotFoundException{
+//        return null;
+        Product existingProduct = productRepository.findById(product.getId()).get();
+        existingProduct.setTitle(product.getTitle());
+        existingProduct.setCategory(product.getCategory());
+        existingProduct.setPrice(product.getPrice());
+
+        Category category = product.getCategory();
+        if(category.getId()==null){
+            category = categoryRepository.save(category);
+        }
+        existingProduct.setCategory(category);
+        return productRepository.save(product);
     }
 
     @Override
