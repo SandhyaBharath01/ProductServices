@@ -5,6 +5,7 @@ import com.scaler.productservices.models.Category;
 import com.scaler.productservices.models.Product;
 import com.scaler.productservices.repositories.CategoryRepository;
 import com.scaler.productservices.repositories.ProductRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -54,7 +55,13 @@ public class SelfProductService implements ProductService{
 
     @Override
     public Product replaceProduct(Long id, Product product) {
-        return null;
+//        return null;
+        Product existingProduct = productRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Product with id " + id + " not found"));
+        existingProduct.setTitle(product.getTitle());
+        existingProduct.setCategory(product.getCategory());
+        existingProduct.setPrice(product.getPrice());
+
+        return productRepository.save(existingProduct);
     }
     public void deleteProduct(Long id) {
         productRepository.deleteById(id);
