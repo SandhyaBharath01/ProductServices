@@ -19,5 +19,27 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByPrice(Double price);
     @Override
     List<Product> findAll(Sort sort);
+
+    //select * from products where price > ?
+
+    List<Product> findProductByTitleLike(String word); // case sensitive
+    //select * from products where title like '%iphone%'
+
+    List<Product> findByTitleLikeIgnoreCase(String word); // case insensitive.
+
+    List<Product> findTop5ByTitleContains(String word);
+    //select * from products where title like '' LIMIT 5
+
+//    List<Product> findTopByTitleContains(int top, String word);
+
+    List<Product> findProductsByTitleContainsAndPriceGreaterThan(
+            String word,
+            Double price
+    );
+
+    List<Product> findProductsByTitleContainsOrderById(String word);
+
+
 }
+
 
