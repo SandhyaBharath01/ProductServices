@@ -4,6 +4,7 @@ import com.scaler.productservices.exceptions.ProductNotFoundException;
 import com.scaler.productservices.models.Product;
 import com.scaler.productservices.service.ProductService;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -37,8 +38,8 @@ public class ProductController {
     }
 
     @GetMapping()
-    public List<Product> getAllProducts(){
-        return productService.getAllProducts();
+    public Page<Product> getAllProducts(@RequestParam("pageNumber") int pageNumber, @RequestParam("pageSize") int pageSize){
+        return productService.getAllProducts(pageNumber, pageSize);
     }
     //Update-Patch
     @PatchMapping ("/{id}")

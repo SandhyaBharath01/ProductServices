@@ -1,6 +1,8 @@
 package com.scaler.productservices.repositories;
 
 import com.scaler.productservices.models.Product;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,7 +20,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 //    List<Product> findByName(String word);
     List<Product> findByPrice(Double price);
     @Override
-    List<Product> findAll(Sort sort);
+    Page<Product> findAll(Pageable pageable);
 
     //select * from products where price > ?
 

@@ -3,6 +3,8 @@ package com.scaler.productservices.service;
 import com.scaler.productservices.dtos.FakeStoreProductDto;
 import com.scaler.productservices.exceptions.ProductNotFoundException;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
@@ -46,7 +48,7 @@ public class FakeStoreProductService implements ProductService{
         return convertFakeStoreProductToProduct(fakeStoreProductDto);
     }
     @Override
-    public List<Product> getAllProducts(){
+    public Page<Product> getAllProducts(int pageNumber, int pageSize){
         FakeStoreProductDto[] fakeStoreProductDtos = restTemplate.getForObject(
                "https://fakestoreapi.com/products",
                 FakeStoreProductDto[].class
@@ -56,7 +58,7 @@ public class FakeStoreProductService implements ProductService{
         for(FakeStoreProductDto fakeStoreProductDto : fakeStoreProductDtos){
             products.add(convertFakeStoreProductToProduct(fakeStoreProductDto));
         }
-        return products;
+        return new PageImpl<>(products);
     }
     //Update - Patch
     @Override
