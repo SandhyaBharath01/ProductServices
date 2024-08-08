@@ -20,7 +20,7 @@ public class ProductController {
     private ProductService productService;
 
     //Constructor
-    public ProductController(@Qualifier("selfProductService") ProductService productService){
+    public ProductController(@Qualifier("fakeStoreProductService") ProductService productService){
         this.productService = productService;
     }
 //    @GetMapping("/{id}")
